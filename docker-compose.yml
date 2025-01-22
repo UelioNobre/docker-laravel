@@ -1,0 +1,15 @@
+services:
+  php-apache:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: php-apache-dev
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./app/project-name:/var/www/html
+    environment:
+      APACHE_RUN_USER: www-data
+      APACHE_RUN_GROUP: www-data
+    command: ['php', 'artisan', 'serve', '--host=0.0.0.0', '--port=8000']
+    restart: always
